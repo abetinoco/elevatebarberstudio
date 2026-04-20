@@ -65,37 +65,62 @@ export default function HomePage() {
   const todayIdx = new Date().getDay()
   useReveal()
 
-  /* Mobile-only exclusive accordion for the Services section.
-     Below 768px, wire a click handler that collapses every other
-     open `<details class="svc-group">` when one is being opened.
-     Desktop keeps the default behavior (any combination can be open). */
+  /* Services accordion behavior is mobile-only.
+     • Desktop (≥768px): every <details class="svc-group"> stays open and
+       the summaries are non-interactive, so the menu reads like the
+       original flat two-column list.
+     • Mobile (≤767px): user can expand/collapse, and opening one group
+       collapses any other that was open (exclusive). */
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
+    const mqMobile = window.matchMedia('(max-width: 767px)')
+    const groups = () => document.querySelectorAll('details.svc-group')
+
+    const forceAllOpen = () => {
+      groups().forEach((d) => { if (!d.open) d.open = true })
+    }
 
     const onToggle = (e) => {
-      if (!mq.matches) return
       const target = e.target
-      if (!target || !target.open) return
-      document
-        .querySelectorAll('details.svc-group')
-        .forEach((d) => {
+      if (!target) return
+      if (!mqMobile.matches) {
+        if (!target.open) target.open = true
+        return
+      }
+      if (target.open) {
+        groups().forEach((d) => {
           if (d !== target && d.open) d.open = false
         })
+      }
+    }
+
+    const onSummaryClick = (e) => {
+      if (!mqMobile.matches) e.preventDefault()
     }
 
     const attach = () => {
-      document
-        .querySelectorAll('details.svc-group')
-        .forEach((d) => d.addEventListener('toggle', onToggle))
+      groups().forEach((d) => {
+        d.addEventListener('toggle', onToggle)
+        const summary = d.querySelector('summary')
+        if (summary) summary.addEventListener('click', onSummaryClick)
+      })
     }
     const detach = () => {
-      document
-        .querySelectorAll('details.svc-group')
-        .forEach((d) => d.removeEventListener('toggle', onToggle))
+      groups().forEach((d) => {
+        d.removeEventListener('toggle', onToggle)
+        const summary = d.querySelector('summary')
+        if (summary) summary.removeEventListener('click', onSummaryClick)
+      })
     }
 
+    const sync = () => { if (!mqMobile.matches) forceAllOpen() }
+
+    sync()
     attach()
-    return detach
+    mqMobile.addEventListener('change', sync)
+    return () => {
+      detach()
+      mqMobile.removeEventListener('change', sync)
+    }
   }, [])
 
   return (
@@ -768,7 +793,7 @@ export default function HomePage() {
           </div>
         </div>
         <p className="sf-body">
-          <strong>Daily</strong>Cut reveals, transformations, and the occasional chair-side story.
+          Cut reveals, transformations, and the occasional chair-side story.
         </p>
       </a>
 
@@ -799,7 +824,7 @@ export default function HomePage() {
           </div>
         </div>
         <p className="sf-body">
-          <strong>Weekly</strong>Announcements, studio hours, and community updates.
+          Announcements, studio hours, and community updates.
         </p>
       </a>
 

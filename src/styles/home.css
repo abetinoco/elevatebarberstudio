@@ -1503,7 +1503,9 @@ section{padding:52px 20px 56px;position:relative}
   .sf-arrow svg{width:12px;height:12px}
 
   /* Body copy is too cramped to read at 3-wide, so replace it with
-     just the frequency label (DAILY / WEEKLY / ANYTIME) via the strong tag. */
+     just the frequency label (ANYTIME) via the strong tag. Cards without a
+     strong label (Instagram, Facebook — we don't publish a posting cadence)
+     drop the whole bottom stripe on mobile. */
   .sf-body{
     padding-top:8px;
     border-top:1px solid rgba(18,17,16,.08);
@@ -1511,6 +1513,7 @@ section{padding:52px 20px 56px;position:relative}
     line-height:1;
     margin-top:10px;
   }
+  .sf-body:not(:has(strong)){display:none}
   .sf-body strong{
     display:inline-block;
     font-size:9.5px;letter-spacing:.18em;
@@ -2102,6 +2105,12 @@ section{padding:52px 20px 56px;position:relative}
     column-gap:56px;row-gap:0;align-items:start
   }
   .svc-group{margin-bottom:0}
+  /* Accordion dropdown affordances are mobile-only; on desktop every group is
+     force-open (see useEffect in HomePage.jsx), so strip the chevron and any
+     interactive styling from the summary. */
+  .svc-group .svc-chev{display:none}
+  .svc-group summary.svc-cat{cursor:default}
+  .svc-group summary.svc-cat:hover{color:var(--white)}
   .svc-cat{font-size:30px;padding-top:48px;margin-bottom:22px}
   .svc-group:nth-child(-n+2) .svc-cat{border-top:0;padding-top:0}
   .svc-name{font-size:17px}
