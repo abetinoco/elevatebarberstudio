@@ -944,16 +944,15 @@ section{padding:52px 20px 56px;position:relative}
     border-radius:110px 110px 22px 22px;
     box-shadow:0 14px 32px -18px rgba(0,0,0,0.45)
   }
-  .closing-card-wrap--inline .closing-card-inner{padding:28px 18px 18px;gap:0}
-  .closing-card-wrap--inline .closing-card-mark{margin-bottom:12px}
-  .closing-card-wrap--inline .closing-card-logo{height:40px}
-  .closing-card-wrap--inline .closing-card-rule{width:24px;margin:0 0 10px}
-  .closing-card-wrap--inline .closing-card-stat-num{font-size:30px}
-  .closing-card-wrap--inline .closing-card-stat-star{font-size:15px;transform:translateY(-2px)}
-  .closing-card-wrap--inline .closing-card-label{
-    font-size:8.5px;letter-spacing:.24em;margin-bottom:0
-  }
+  /* Mobile chip is logo-only: strip rule / stat / label / meta so the
+     wordmark can sit at the true optical center of the arch shape. */
+  .closing-card-wrap--inline .closing-card-rule,
+  .closing-card-wrap--inline .closing-card-stat,
+  .closing-card-wrap--inline .closing-card-label,
   .closing-card-wrap--inline .closing-card-meta{display:none}
+  .closing-card-wrap--inline .closing-card-inner{padding:18px;gap:0}
+  .closing-card-wrap--inline .closing-card-mark{margin:0}
+  .closing-card-wrap--inline .closing-card-logo{height:54px;width:auto}
 }
 .closing-card{
   position:relative;
