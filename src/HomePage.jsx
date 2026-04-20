@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './styles/home.css'
 import ReviewsMarquee from './components/ReviewsMarquee'
@@ -63,6 +64,39 @@ const FAQS = [
 export default function HomePage() {
   const todayIdx = new Date().getDay()
   useReveal()
+
+  /* Mobile-only exclusive accordion for the Services section.
+     Below 768px, wire a click handler that collapses every other
+     open `<details class="svc-group">` when one is being opened.
+     Desktop keeps the default behavior (any combination can be open). */
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+
+    const onToggle = (e) => {
+      if (!mq.matches) return
+      const target = e.target
+      if (!target || !target.open) return
+      document
+        .querySelectorAll('details.svc-group')
+        .forEach((d) => {
+          if (d !== target && d.open) d.open = false
+        })
+    }
+
+    const attach = () => {
+      document
+        .querySelectorAll('details.svc-group')
+        .forEach((d) => d.addEventListener('toggle', onToggle))
+    }
+    const detach = () => {
+      document
+        .querySelectorAll('details.svc-group')
+        .forEach((d) => d.removeEventListener('toggle', onToggle))
+    }
+
+    attach()
+    return detach
+  }, [])
 
   return (
     <div className="elevate-home">
@@ -183,44 +217,60 @@ export default function HomePage() {
   </div>
 </section>
 
-{/* TRUST STRIP */}
-<div className="trust-strip" role="region" aria-label="Barber Elevate Studio credentials">
-  <div className="trust-strip-inner">
-    <div className="ts-item">
-      <span className="ts-num"><span className="ts-stars">★★★★★</span> 5.0</span>
-      <span className="ts-label">Booksy Rating</span>
+{/* TRUST STRIP
+    On mobile this becomes an infinite-scrolling marquee; the .ts-group is
+    rendered twice (the duplicate is inert + aria-hidden) so the CSS loop
+    can translate by -50% and feel seamless. On tablet/desktop the track
+    wrappers collapse via `display:contents`, restoring the original layout. */}
+{(() => {
+  const trustItems = (
+    <>
+      <div className="ts-item">
+        <span className="ts-num"><span className="ts-stars">★★★★★</span> 5.0</span>
+        <span className="ts-label">Booksy Rating</span>
+      </div>
+      <div className="ts-item">
+        <span className="ts-num">250<sup>+</sup></span>
+        <span className="ts-label">Happy Clients</span>
+      </div>
+      <div className="ts-item">
+        <span className="ts-num">9 Yrs</span>
+        <span className="ts-label">Experience</span>
+      </div>
+      <div className="ts-item">
+        <span className="ts-num">100%</span>
+        <span className="ts-label">Licensed Barber</span>
+      </div>
+      <div className="ts-item">
+        <span className="ts-num">Men, Women &amp; Kids</span>
+        <span className="ts-label">All Welcome</span>
+      </div>
+      <a
+        href={BOOKSY_BOOK_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="ts-booksy"
+        aria-label="Book with Booksy"
+      >
+        <img
+          src="/booksy-badge.png"
+          alt="Book with Booksy"
+          className="ts-booksy-badge"
+        />
+      </a>
+    </>
+  )
+  return (
+    <div className="trust-strip" role="region" aria-label="Barber Elevate Studio credentials">
+      <div className="trust-strip-inner">
+        <div className="ts-track">
+          <div className="ts-group">{trustItems}</div>
+          <div className="ts-group ts-group--dup" aria-hidden="true" inert="">{trustItems}</div>
+        </div>
+      </div>
     </div>
-    <div className="ts-item">
-      <span className="ts-num">250<sup>+</sup></span>
-      <span className="ts-label">Happy Clients</span>
-    </div>
-    <div className="ts-item">
-      <span className="ts-num">9 Yrs</span>
-      <span className="ts-label">Experience</span>
-    </div>
-    <div className="ts-item">
-      <span className="ts-num">100%</span>
-      <span className="ts-label">Licensed Barber</span>
-    </div>
-    <div className="ts-item">
-      <span className="ts-num">Men, Women &amp; Kids</span>
-      <span className="ts-label">All Welcome</span>
-    </div>
-    <a
-      href={BOOKSY_BOOK_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="ts-booksy"
-      aria-label="Book with Booksy"
-    >
-      <img
-        src="/booksy-badge.png"
-        alt="Book with Booksy"
-        className="ts-booksy-badge"
-      />
-    </a>
-  </div>
-</div>
+  )
+})()}
 
 {/* PROCESS — how it works, placed early so visitors know the flow */}
 <section id="process" className="pattern-bg-light">
@@ -262,8 +312,8 @@ export default function HomePage() {
   <h2 className="sec-title reveal" style={{color: 'var(--white)'}}>Our Elevated{' '}<em style={{fontFamily: "'Barlow Condensed',sans-serif", fontStyle: 'italic', fontWeight: 700, color: 'var(--gm)'}}>Services</em></h2>
   <p className="svc-intro reveal">Every service is a craft. Book the exact service you need—pricing and times match our Booksy menu.</p>
   <div className="reveal svc-list">
-    <div className="svc-group">
-      <h3 className="svc-cat"><Icon name="sparkle" size={20} className="svc-cat-ico" /><span>Popular services</span></h3>
+    <details className="svc-group" open>
+      <summary className="svc-cat"><Icon name="sparkle" size={20} className="svc-cat-ico" /><span>Popular services</span><span className="svc-chev" aria-hidden>▾</span></summary>
       <div className="svc-item">
         <div className="svc-main">
           <div className="svc-name">Haircut / fade (all ages)</div>
@@ -297,10 +347,21 @@ export default function HomePage() {
           <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
         </div>
       </div>
-    </div>
+      <div className="svc-item">
+        <div className="svc-main">
+          <div className="svc-name">Women&apos;s haircut</div>
+          <p className="svc-desc">Shampoo included if desired.</p>
+          <div className="svc-dur">45 min</div>
+        </div>
+        <div className="svc-meta">
+          <span className="svc-price">$35</span>
+          <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
+        </div>
+      </div>
+    </details>
 
-    <div className="svc-group">
-      <h3 className="svc-cat"><Icon name="scissors" size={20} className="svc-cat-ico" /><span>Cuts & grooming</span></h3>
+    <details className="svc-group">
+      <summary className="svc-cat"><Icon name="scissors" size={20} className="svc-cat-ico" /><span>Cuts & grooming</span><span className="svc-chev" aria-hidden>▾</span></summary>
       <div className="svc-item">
         <div className="svc-main">
           <div className="svc-name">Luxury haircut and shampoo</div>
@@ -323,21 +384,10 @@ export default function HomePage() {
           <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
         </div>
       </div>
-      <div className="svc-item">
-        <div className="svc-main">
-          <div className="svc-name">Women&apos;s haircut</div>
-          <p className="svc-desc">Shampoo included if desired.</p>
-          <div className="svc-dur">45 min</div>
-        </div>
-        <div className="svc-meta">
-          <span className="svc-price">$35</span>
-          <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
-        </div>
-      </div>
-    </div>
+    </details>
 
-    <div className="svc-group">
-      <h3 className="svc-cat"><Icon name="drop" size={20} className="svc-cat-ico" /><span>Waxing</span></h3>
+    <details className="svc-group">
+      <summary className="svc-cat"><Icon name="drop" size={20} className="svc-cat-ico" /><span>Waxing</span><span className="svc-chev" aria-hidden>▾</span></summary>
       <div className="svc-item">
         <div className="svc-main">
           <div className="svc-name">Eyebrow waxing</div>
@@ -378,10 +428,10 @@ export default function HomePage() {
           <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
         </div>
       </div>
-    </div>
+    </details>
 
-    <div className="svc-group">
-      <h3 className="svc-cat"><Icon name="package" size={20} className="svc-cat-ico" /><span>Packages</span></h3>
+    <details className="svc-group">
+      <summary className="svc-cat"><Icon name="package" size={20} className="svc-cat-ico" /><span>Packages</span><span className="svc-chev" aria-hidden>▾</span></summary>
       <div className="svc-item">
         <div className="svc-main">
           <div className="svc-name">Haircut + beard + eyebrows</div>
@@ -414,7 +464,7 @@ export default function HomePage() {
           <a className="svc-book" href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer">Book</a>
         </div>
       </div>
-    </div>
+    </details>
   </div>
   <div className="svc-cta-wrap reveal">
     <a href={BOOKSY_BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-wht">Book Your Appointment <span className="arr" style={{color: 'var(--black)'}}>→</span></a>
@@ -809,6 +859,23 @@ export default function HomePage() {
         <span className="closing-hl-line closing-hl-line--italic">Is Waiting.</span>
       </h2>
 
+      {/* Compact brand chip — renders inline under the headline on mobile only. */}
+      <div className="closing-card-wrap closing-card-wrap--inline reveal" aria-hidden="true">
+        <div className="closing-card">
+          <div className="closing-card-inner">
+            <div className="closing-card-mark">
+              <img src="/logo-elevate.png" alt="Barber Elevate Studio" className="closing-card-logo" />
+            </div>
+            <div className="closing-card-rule"></div>
+            <div className="closing-card-stat">
+              <span className="closing-card-stat-num">5.0</span>
+              <span className="closing-card-stat-star">★</span>
+            </div>
+            <div className="closing-card-label">Rated on Booksy</div>
+          </div>
+        </div>
+      </div>
+
       <p className="closing-sub reveal">
         Skip the walk-in lottery. Reserve your spot on Booksy — Lake County&rsquo;s premium barber studio is a quick drive, and every cut is by appointment only.
       </p>
@@ -847,8 +914,8 @@ export default function HomePage() {
       </ul>
     </div>
 
-    {/* RIGHT: brand card — soft-arch cream card matching the hero portfolio aesthetic */}
-    <div className="closing-card-wrap reveal" aria-hidden="true">
+    {/* RIGHT: brand card — soft-arch cream card matching the hero portfolio aesthetic (desktop/tablet) */}
+    <div className="closing-card-wrap closing-card-wrap--aside reveal" aria-hidden="true">
       <div className="closing-card">
         <div className="closing-card-inner">
           <div className="closing-card-mark">

@@ -5,6 +5,7 @@ import {
   BUSINESS_PHONE_DISPLAY,
   BUSINESS_PHONE_TEL,
 } from '../data/siteData'
+import FloatingActions from './FloatingActions'
 
 /* Nav structure — ordered left-to-right the same way the page flows
    top-to-bottom. Every item is an on-home anchor so the nav scrolls in-page
@@ -235,6 +236,8 @@ export default function SiteNav() {
           </div>
         </div>
       </div>
+
+      <FloatingActions />
     </>
   )
 }

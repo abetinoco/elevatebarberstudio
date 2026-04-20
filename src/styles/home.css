@@ -196,7 +196,7 @@ body:has(.elevate-home){
 #hero{
   position:relative;
   min-height:auto;                 /* no more forced 100svh */
-  padding:124px 20px 44px;
+  padding:88px 20px 28px;          /* tighter on mobile so CTA lands in first viewport */
   background:var(--cream);
   color:var(--ink);
   overflow:hidden;
@@ -211,7 +211,7 @@ body:has(.elevate-home){
 }
 .hero-inner{
   position:relative;z-index:1;
-  display:flex;flex-direction:column;gap:20px;
+  display:flex;flex-direction:column;gap:14px;
   max-width:1280px;margin:0 auto;width:100%;
   align-items:stretch;
 }
@@ -223,8 +223,8 @@ body:has(.elevate-home){
 .hero-trust{order:1}
 .hero-h1{order:2}
 .hero-mission{order:3}
-.hero-right{order:4;margin-top:8px}
-.hero-sub{order:5;margin-top:8px}
+.hero-right{order:4;margin-top:4px}
+.hero-sub{order:5;margin-top:4px}
 .hero-ctas{order:6}
 .hero-nudge{order:7}
 
@@ -308,12 +308,12 @@ body:has(.elevate-home){
 .hero-sub strong{color:var(--ink);font-weight:600}
 
 .hero-ctas{
-  display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:4px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:2px;
   animation:fadeUp .9s ease .8s both;
 }
 .cta-primary{
   display:inline-flex;align-items:center;gap:12px;
-  padding:16px 28px;
+  padding:14px 24px;
   background:var(--ink);color:var(--cream);
   font-family:'Barlow Condensed',sans-serif;font-weight:600;
   font-size:12px;letter-spacing:.22em;text-transform:uppercase;
@@ -327,7 +327,7 @@ body:has(.elevate-home){
 .cta-primary:hover svg{transform:translateX(4px)}
 .cta-call{
   display:inline-flex;align-items:center;gap:10px;
-  padding:16px 24px;
+  padding:14px 20px;
   font-family:'Barlow Condensed',sans-serif;font-weight:600;
   font-size:12px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink);text-decoration:none;
@@ -345,7 +345,7 @@ body:has(.elevate-home){
 .cta-call:hover svg{transform:rotate(-8deg)}
 .cta-ghost{
   display:inline-flex;align-items:center;
-  padding:15px 22px;
+  padding:13px 20px;
   font-family:'Barlow Condensed',sans-serif;font-weight:600;
   font-size:12px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-lt);text-decoration:none;
@@ -366,7 +366,7 @@ body:has(.elevate-home){
 .hero-nudge a:hover{color:var(--ink-lt)}
 
 /* ── RIGHT: portfolio card — rounded, softened ── */
-.hero-right{display:flex;justify-content:center;align-items:center;padding:6px 6px 6px 0}
+.hero-right{display:flex;justify-content:center;align-items:center;padding:4px 0}
 .portfolio-card{
   position:relative;
   width:100%;max-width:440px;aspect-ratio:4 / 5;
@@ -490,27 +490,44 @@ body:has(.elevate-home){
    ══════════════════════════════════════ */
 .trust-strip{
   background:var(--ink);color:var(--cream);
-  padding:20px 20px;
+  padding:14px 0;
   border-top:1px solid rgba(243,238,230,.08);
+  overflow:hidden;
 }
+/* Mobile: single-row infinite marquee. The track holds two identical
+   groups of items; translating it by -50% loops seamlessly because each
+   group is an exact duplicate. Tablet+ collapses the wrappers via
+   display:contents and falls back to the grid/flex layout. */
 .trust-strip-inner{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1fr;gap:16px;
-  align-items:center;
+  max-width:none;margin:0;
+  display:block;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
-.ts-item{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.ts-track{
+  display:flex;width:max-content;
+  animation:ts-scroll 32s linear infinite;
+  will-change:transform;
+}
+.ts-group{
+  display:flex;align-items:center;
+  gap:34px;padding-right:34px;
+  flex-shrink:0;
+}
+.ts-item{display:flex;flex-direction:column;gap:2px;align-items:flex-start;flex:0 0 auto;white-space:nowrap}
 .ts-num{
-  font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.03em;line-height:1;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.03em;line-height:1;
   color:var(--cream);display:inline-flex;align-items:baseline;gap:8px;
 }
-.ts-num sup{font-size:14px;color:rgba(243,238,230,.55);font-weight:500;vertical-align:super}
-.ts-stars{color:var(--cream);letter-spacing:.08em;font-family:'Barlow',sans-serif;font-size:15px;opacity:.95}
+.ts-num sup{font-size:13px;color:rgba(243,238,230,.55);font-weight:500;vertical-align:super}
+.ts-stars{color:var(--cream);letter-spacing:.08em;font-family:'Barlow',sans-serif;font-size:14px;opacity:.95}
 .ts-label{
-  font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.24em;
+  font-family:'Barlow Condensed',sans-serif;font-size:9.5px;letter-spacing:.22em;
   text-transform:uppercase;color:rgba(243,238,230,.5);font-weight:500;
 }
 .ts-booksy{
-  display:inline-flex;align-items:center;
+  display:inline-flex;align-items:center;flex:0 0 auto;
   text-decoration:none;
   border-radius:12px;overflow:hidden;
   transition:transform .2s,box-shadow .2s;
@@ -520,8 +537,19 @@ body:has(.elevate-home){
 .ts-booksy:hover{transform:translateY(-1px);box-shadow:0 14px 28px -14px rgba(0,0,0,.45)}
 .ts-booksy-badge{
   display:block;
-  height:56px;width:auto;
+  height:44px;width:auto;
   user-select:none;pointer-events:none
+}
+
+@keyframes ts-scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.trust-strip:hover .ts-track,
+.trust-strip:focus-within .ts-track{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){
+  .ts-track{animation:none;transform:none}
+  .ts-group--dup{display:none}
 }
 
 /* ── Booksy mark (small "b" icon used inside book CTAs) ── */
@@ -592,8 +620,8 @@ body:has(.elevate-home){
 .wave{display:block;width:100%;overflow:hidden;line-height:0;margin:0;padding:0}
 .wave svg{display:block;width:100%;height:72px}
 
-/* ── SECTION BASE ── */
-section{padding:72px 24px 64px;position:relative}
+/* ── SECTION BASE (mobile-first; tablet / desktop widen below) ── */
+section{padding:52px 20px 56px;position:relative}
 .sec-tag{display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .sec-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .sec-label{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase}
@@ -603,22 +631,52 @@ section{padding:72px 24px 64px;position:relative}
 }
 
 /* ── SERVICES ── */
-#services{padding:72px 24px 64px}
+#services{padding:56px 20px 56px}
 #services .sec-dot{background:var(--gm)}
 #services .sec-label{color:var(--gm)}
 #services .sec-title{color:var(--white)}
 .svc-intro{font-weight:300;font-size:14px;line-height:1.72;color:var(--gm);max-width:300px;margin-bottom:32px}
+/* Service groups are native <details> accordions.
+   Popular is the only one that ships with `open`; the rest are collapsed.
+   Reset browser defaults so the summary styles cleanly. */
 .svc-group{margin-bottom:8px}
+.svc-group summary{list-style:none;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.svc-group summary::-webkit-details-marker{display:none}
 .svc-cta-wrap{display:flex;justify-content:center;margin-top:40px}
 .svc-cat{
   display:flex;align-items:center;gap:14px;
   font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:26px;
   letter-spacing:.05em;text-transform:uppercase;color:var(--white);
   line-height:1;
-  margin:0 0 18px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.12)
+  margin:0 0 18px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.12);
+  transition:color .2s ease
 }
+.svc-group summary.svc-cat:hover{color:var(--gm)}
 .svc-cat-ico{color:var(--gm);opacity:1;flex-shrink:0;width:22px;height:22px}
+.svc-cat > span:not(.svc-cat-ico):not(.svc-chev){flex:1;min-width:0}
+.svc-chev{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;margin-left:auto;flex-shrink:0;
+  font-size:18px;color:var(--gm);
+  border:1px solid rgba(255,255,255,0.12);border-radius:50%;
+  transition:transform .3s ease,color .2s ease,border-color .2s ease;
+  transform-origin:center
+}
+.svc-group[open] .svc-chev{transform:rotate(180deg);color:var(--white);border-color:rgba(255,255,255,0.28)}
+.svc-group summary.svc-cat:hover .svc-chev{color:var(--white);border-color:rgba(255,255,255,0.28)}
 .svc-group:first-child .svc-cat{border-top:0;padding-top:0}
+/* When collapsed, drop the summary's bottom margin so categories stack
+   tightly; the next group's own padding-top + border-top provides separation. */
+.svc-group:not([open]) .svc-cat{margin-bottom:0}
+.svc-group[open] .svc-item{animation:svc-in .32s ease both}
+@keyframes svc-in{
+  from{opacity:0;transform:translateY(-4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .svc-group[open] .svc-item{animation:none}
+  .svc-chev{transition:none}
+}
 .svc-item{
   border-top:1px solid rgba(255,255,255,0.09);
   padding:18px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;
@@ -662,7 +720,7 @@ section{padding:72px 24px 64px;position:relative}
 }
 
 /* ── ABOUT (editorial layout) ── */
-#about{padding:56px 22px;position:relative;overflow:hidden}
+#about{padding:48px 20px;position:relative;overflow:hidden}
 
 .about-inner{position:relative}
 
@@ -768,7 +826,7 @@ section{padding:72px 24px 64px;position:relative}
 
 /* ── CLOSING CTA (final conversion moment, before footer) ── */
 #closing{
-  padding:80px 24px 92px;
+  padding:56px 20px 72px;
   position:relative;
   overflow:hidden
 }
@@ -869,6 +927,34 @@ section{padding:72px 24px 64px;position:relative}
   display:flex;justify-content:center;
   padding:20px 0
 }
+
+/* ── Mobile: swap in the compact inline chip, hide the big side card ──
+   The inline variant sits right under the "Your Chair Is Waiting" headline
+   as a small brand punctuation, then the subtext/CTAs resume below it. */
+.closing-card-wrap--inline{display:none}
+@media (max-width:767px){
+  .closing-card-wrap--aside{display:none}
+  .closing-card-wrap--inline{
+    display:flex;justify-content:center;
+    padding:4px 0 22px;margin-top:-4px
+  }
+  .closing-card-wrap--inline .closing-card{
+    max-width:200px;
+    aspect-ratio:5 / 4;
+    border-radius:110px 110px 22px 22px;
+    box-shadow:0 14px 32px -18px rgba(0,0,0,0.45)
+  }
+  .closing-card-wrap--inline .closing-card-inner{padding:28px 18px 18px;gap:0}
+  .closing-card-wrap--inline .closing-card-mark{margin-bottom:12px}
+  .closing-card-wrap--inline .closing-card-logo{height:40px}
+  .closing-card-wrap--inline .closing-card-rule{width:24px;margin:0 0 10px}
+  .closing-card-wrap--inline .closing-card-stat-num{font-size:30px}
+  .closing-card-wrap--inline .closing-card-stat-star{font-size:15px;transform:translateY(-2px)}
+  .closing-card-wrap--inline .closing-card-label{
+    font-size:8.5px;letter-spacing:.24em;margin-bottom:0
+  }
+  .closing-card-wrap--inline .closing-card-meta{display:none}
+}
 .closing-card{
   position:relative;
   width:100%;
@@ -953,7 +1039,7 @@ section{padding:72px 24px 64px;position:relative}
 @keyframes counterRotate{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
 
 /* ── REVIEWS (Booksy-style + marquee) ── */
-#reviews{padding:72px 24px 64px;position:relative}
+#reviews{padding:56px 20px 56px;position:relative}
 #reviews .sec-dot{background:var(--gm)}
 #reviews .sec-label{color:var(--gm)}
 #reviews .sec-title{color:var(--white)}
@@ -1071,15 +1157,19 @@ section{padding:72px 24px 64px;position:relative}
   color:rgba(246,244,241,0.78);margin:0;font-style:normal
 }
 
-/* Review CTAs (below marquee) */
+/* Review CTAs (below marquee)
+   Mobile: always side-by-side. Each pill flexes to share the row so they
+   never stack, regardless of viewport width. */
 .rvw-cta-row{
-  margin-top:36px;
-  display:flex;flex-wrap:wrap;justify-content:center;
-  gap:12px
+  margin-top:32px;
+  display:flex;flex-wrap:nowrap;justify-content:center;align-items:stretch;
+  gap:10px;
+  width:100%;max-width:520px;margin-left:auto;margin-right:auto
 }
 .rvw-cta{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:12px 20px 12px 14px;
+  flex:1 1 0;min-width:0;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 12px 10px 10px;
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.12);
   border-radius:999px;
@@ -1093,31 +1183,41 @@ section{padding:72px 24px 64px;position:relative}
   transform:translateY(-1px)
 }
 .rvw-cta-ico{
-  width:26px;height:26px;
+  width:24px;height:24px;
   border-radius:6px;
   object-fit:contain;flex-shrink:0;
   display:block
 }
 .rvw-cta--booksy .rvw-cta-ico{background:#fff;padding:3px}
-.rvw-cta--google .rvw-cta-ico{
-  background:#fff;padding:4px
-}
+.rvw-cta--google .rvw-cta-ico{background:#fff;padding:4px}
 .rvw-cta-txt{
-  display:flex;flex-direction:column;line-height:1.15;text-align:left
+  display:flex;flex-direction:column;line-height:1.15;text-align:left;
+  min-width:0
 }
 .rvw-cta-sub{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:10px;font-weight:500;
-  letter-spacing:.24em;text-transform:uppercase;
-  color:rgba(246,244,241,0.6)
+  font-size:9.5px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(246,244,241,0.6);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
 .rvw-cta-brand{
-  font-size:16px;font-weight:600;letter-spacing:.01em;
-  color:var(--white)
+  font-size:15px;font-weight:600;letter-spacing:.01em;
+  color:var(--white);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+/* Tablet+: restore generous sizing now that we have horizontal room. */
+@media (min-width:768px){
+  .rvw-cta-row{gap:14px;max-width:none}
+  .rvw-cta{flex:0 0 auto;padding:12px 20px 12px 14px;gap:12px}
+  .rvw-cta-ico{width:26px;height:26px}
+  .rvw-cta-sub{font-size:10px;letter-spacing:.24em}
+  .rvw-cta-brand{font-size:16px}
 }
 
 /* ── LOCATION ── */
-#location{padding:72px 24px 64px}
+#location{padding:52px 20px 52px}
 #location .sec-dot{background:var(--gm)}
 #location .sec-label{color:var(--gm)}
 #location .sec-title{color:var(--white)}
@@ -1223,10 +1323,10 @@ section{padding:72px 24px 64px;position:relative}
   --sf-ig-gradient:linear-gradient(45deg,#F09433 0%,#E6683C 20%,#DC2743 45%,#CC2366 65%,#BC1888 100%);
   --sf-fb:#1877F2;
   --sf-fb-deep:#0C5BC7;
-  --sf-booksy:#1DB5A6;
+  --sf-booksy:#11A4AE;
   --sf-booksy-deep:#0E8A7E;
   position:relative;
-  padding:80px 22px 90px;
+  padding:56px 20px 72px;
   overflow:hidden
 }
 
@@ -1307,6 +1407,7 @@ section{padding:72px 24px 64px;position:relative}
 .sf-icon--booksy{background:var(--sf-booksy)}
 .sf-icon svg{width:28px;height:28px;color:#fff;z-index:2;position:relative}
 .sf-icon-img{width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1);position:relative;z-index:2}
+.sf-icon--booksy .sf-icon-img{filter:none}
 .sf-icon::after{
   content:'';position:absolute;inset:-40%;background:inherit;
   filter:blur(30px);opacity:.55;z-index:-1
@@ -1368,10 +1469,60 @@ section{padding:72px 24px 64px;position:relative}
   .sf-ribbon{display:none}
 }
 
+/* ── Mobile: pack the three social cards into a 3×1 row ──
+   Each card becomes a vertical stack: icon on top, name + frequency label
+   below, arrow tucked in the top-right corner. The long italic description
+   is hidden at this size since it won't read at ~110px wide anyway. */
+@media (max-width:767px){
+  .sf-cards{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:10px;
+  }
+  .sf-card{
+    padding:14px 12px 14px;
+    border-radius:18px;
+  }
+  .sf-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:0;
+    padding-right:6px;
+  }
+  .sf-icon{width:40px;height:40px;border-radius:11px}
+  .sf-icon svg{width:20px;height:20px}
+  .sf-icon-img{width:26px;height:26px}
+  .sf-meta{width:100%;min-width:0}
+  .sf-name{font-size:15px;margin-bottom:3px}
+  .sf-handle{display:none}
+  .sf-arrow{
+    position:absolute;top:10px;right:10px;
+    width:26px;height:26px;
+  }
+  .sf-arrow svg{width:12px;height:12px}
+
+  /* Body copy is too cramped to read at 3-wide, so replace it with
+     just the frequency label (DAILY / WEEKLY / ANYTIME) via the strong tag. */
+  .sf-body{
+    padding-top:8px;
+    border-top:1px solid rgba(18,17,16,.08);
+    font-size:0; /* hide the italic description text */
+    line-height:1;
+    margin-top:10px;
+  }
+  .sf-body strong{
+    display:inline-block;
+    font-size:9.5px;letter-spacing:.18em;
+    margin-right:0;
+  }
+}
+
 /* ── FOOTER ── */
 .site-footer{
   background:var(--black);color:var(--gl);
-  padding:64px 24px 0;position:relative;overflow:hidden
+  padding:48px 20px 0;position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.08)
 }
 .site-footer::before{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -1486,6 +1637,59 @@ section{padding:72px 24px 64px;position:relative}
 }
 .ft-nav a:hover{color:var(--white)}
 
+/* ── Mobile footer: put Visit / Hours / Connect side-by-side ──
+   Brand stays full-width on top; the 3 info columns share a single row
+   beneath it. Row items inside Hours and Connect stack vertically so the
+   narrow columns don't force their text to truncate awkwardly. */
+@media (max-width:767px){
+  .ft-inner{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    column-gap:14px;
+    row-gap:30px;
+    padding-bottom:36px;
+  }
+  .ft-col--brand{grid-column:1 / -1}
+  .ft-col{gap:12px;min-width:0}
+
+  .ft-h{
+    font-size:11px;letter-spacing:.14em;gap:6px;margin-bottom:2px;
+  }
+  .ft-h-ico{width:12px;height:12px}
+
+  /* Visit */
+  .ft-addr{font-size:12.5px;line-height:1.5}
+  .ft-col--visit .ft-link{
+    font-size:10px;letter-spacing:.12em;gap:6px;
+  }
+  .ft-col--visit .ft-link-arrow{width:12px;height:12px}
+
+  /* Hours — stack day above time so the column stays compact. */
+  .ft-hrs{gap:4px}
+  .ft-hrs-row{
+    flex-direction:column;align-items:flex-start;
+    gap:1px;padding:5px 0;
+  }
+  .ft-hrs-day{font-size:9.5px;letter-spacing:.08em}
+  .ft-hrs-time{font-size:12px;line-height:1.2}
+  .ft-hrs-row.is-today::before{left:-6px;width:2px;height:12px}
+
+  /* Connect — stack label above handle so long handles don't overflow. */
+  .ft-links{gap:6px}
+  .ft-link--contact{
+    flex-direction:column;align-items:flex-start;
+    gap:2px;padding:6px 0;
+  }
+  .ft-link-lbl{
+    font-size:9.5px;letter-spacing:.16em;gap:6px;
+  }
+  .ft-link-lbl svg{width:11px;height:11px}
+  .ft-link-val{
+    text-align:left;font-size:11.5px;
+    max-width:100%;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
@@ -1497,7 +1701,7 @@ section{padding:72px 24px 64px;position:relative}
    PORTFOLIO
    ────────────────────────────────────────────────────────────── */
 #portfolio{
-  padding:24px 24px 72px;
+  padding:40px 20px 56px;
   background-color:var(--black);
   position:relative;
   border-top:1px solid rgba(255,255,255,0.1)
@@ -1508,12 +1712,12 @@ section{padding:72px 24px 64px;position:relative}
 #portfolio .svc-intro{margin-bottom:28px;color:var(--gm);max-width:420px}
 
 .pf-grid{
-  display:grid;grid-template-columns:1fr;gap:14px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;
   max-width:1120px;margin:0 auto
 }
 .pf-tile{
   position:relative;display:block;overflow:hidden;
-  aspect-ratio:4 / 5;min-height:280px;
+  aspect-ratio:4 / 5;min-height:0;
   background:linear-gradient(135deg,#1f1f1c 0%,#131311 60%,#0c0c0b 100%);
   border:1px solid rgba(255,255,255,0.08);
   color:var(--white);text-decoration:none;
@@ -1578,14 +1782,14 @@ section{padding:72px 24px 64px;position:relative}
    PROCESS (How it works)
    ────────────────────────────────────────────────────────────── */
 #process{
-  padding:24px 24px;
+  padding:40px 20px 48px;
   background-color:var(--white);
   position:relative
 }
-#process .svc-intro{max-width:480px;margin-bottom:40px}
+#process .svc-intro{max-width:480px;margin-bottom:28px}
 
 .proc-grid{
-  display:grid;grid-template-columns:1fr;gap:36px;
+  display:grid;grid-template-columns:1fr;gap:24px;
   max-width:1120px;margin:0 auto
 }
 .proc-step{position:relative;padding-top:2px}
@@ -1608,8 +1812,56 @@ section{padding:72px 24px 64px;position:relative}
 }
 .proc-desc{font-weight:300;font-size:14px;line-height:1.72;color:var(--gm);max-width:320px}
 
-@media (min-width:640px){
-  .proc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 48px}
+/* ── Mobile: 4-step timeline as a horizontal swipe-carousel ──
+   The section's side padding is cancelled with negative margin so the track
+   bleeds edge-to-edge. Each step snaps into place on scroll and a sliver of
+   the next card peeks out to invite the swipe. */
+@media (max-width:767px){
+  .proc-grid{
+    display:flex;grid-template-columns:none;
+    flex-wrap:nowrap;
+    gap:14px;
+    overflow-x:auto;overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:20px;
+    padding:6px 20px 22px;
+    margin:0 -20px;
+    max-width:none;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .proc-grid::-webkit-scrollbar{display:none}
+  .proc-step{
+    flex:0 0 78%;
+    max-width:78%;
+    scroll-snap-align:start;
+    padding:20px 20px 22px;
+    background:rgba(255,255,255,0.55);
+    border:1px solid rgba(18,17,16,0.07);
+    border-radius:20px;
+    box-shadow:0 10px 24px -18px rgba(18,17,16,.25);
+  }
+  .proc-step:last-child{margin-right:4px}
+  .proc-head{margin-bottom:12px}
+  .proc-num{font-size:42px}
+  .proc-rule{margin-bottom:14px}
+  .proc-title{font-size:22px;margin-bottom:8px}
+  .proc-desc{max-width:none;font-size:13.5px;line-height:1.6}
+}
+
+@media (min-width:768px){
+  .proc-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:44px 48px;
+    overflow:visible;scroll-snap-type:none;
+    padding:0;margin:0 auto;
+    max-width:1120px;
+  }
+  .proc-step{
+    flex:initial;max-width:none;
+    padding:2px 0;
+    background:transparent;border:0;border-radius:0;box-shadow:none;
+  }
 }
 @media (min-width:1024px){
   #process{padding:40px 64px}
@@ -1635,11 +1887,11 @@ section{padding:72px 24px 64px;position:relative}
    FAQ (Accordion)
    ────────────────────────────────────────────────────────────── */
 #faq{
-  padding:24px 24px 80px;
+  padding:40px 20px 56px;
   background-color:var(--white);
   position:relative
 }
-#faq .svc-intro{max-width:500px;margin-bottom:36px}
+#faq .svc-intro{max-width:500px;margin-bottom:24px}
 .faq-list{
   max-width:860px;margin:0 auto;
   border-top:1px solid var(--off)
@@ -1713,7 +1965,98 @@ section{padding:72px 24px 64px;position:relative}
    ────────────────────────────────────────────────────────────── */
 .nl-link{text-decoration:none;color:inherit}
 .nav-links{display:none}
+
+/* ── Mobile nav actions ──
+   On phones we hide the in-nav Call/Book row entirely. The booking + call
+   CTAs live in a floating stack (see .floating-actions below) so the nav
+   stays minimal: [logo] [hamburger]. Desktop re-enables the inline row. */
 .nav-actions{display:none}
+.nav-book{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;background:var(--black);color:var(--white);
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:none;border:1.5px solid var(--black);
+  border-radius:100px;
+  transition:background .2s,border-color .2s,transform .2s;
+  box-shadow:0 6px 16px -10px rgba(0,0,0,.45)
+}
+.nav-book:hover{background:var(--gd);border-color:var(--gd);transform:translateY(-1px)}
+.nav-book .booksy-mark{width:16px;height:16px}
+
+/* ── Floating actions stack (mobile) ──
+   Fixed column on the bottom-right: Book (primary, bottom), Call (middle),
+   Back-to-top (top, only after hero). Entire group slides out on scroll-down
+   and slides back in on scroll-up via the --hidden modifier. */
+.floating-actions{
+  position:fixed;
+  right:14px;
+  bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index:190;
+  display:flex;flex-direction:column;align-items:flex-end;
+  gap:10px;
+  pointer-events:none;
+  transform:translateY(0);opacity:1;
+  transition:transform .32s cubic-bezier(.2,.7,.2,1), opacity .28s ease;
+}
+.floating-actions > *{pointer-events:auto}
+.floating-actions--hidden{
+  transform:translateY(130%);
+  opacity:0;
+  pointer-events:none;
+}
+
+.fa-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;border:0;cursor:pointer;
+  font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .18s ease, opacity .22s ease, background .2s ease, box-shadow .2s ease;
+}
+.fa-btn:active{transform:scale(.94)}
+.fa-btn:focus-visible{outline:2px solid var(--gd);outline-offset:3px}
+
+.fa-top{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.94);color:var(--black);
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.4), 0 2px 6px rgba(0,0,0,.18);
+  border:1px solid rgba(0,0,0,.08);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.fa-top svg{width:18px;height:18px}
+.fa-top--tucked{
+  opacity:0;transform:translateY(8px) scale(.9);
+  pointer-events:none;
+}
+
+.fa-call{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--black);color:var(--white);
+  box-shadow:0 10px 24px -8px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.08);
+}
+.fa-call svg{width:20px;height:20px}
+
+.fa-book{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 20px;
+  background:var(--black);color:var(--white);
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;
+  font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1.5px solid var(--black);border-radius:100px;
+  box-shadow:0 14px 30px -10px rgba(0,0,0,.6), 0 3px 10px rgba(0,0,0,.3);
+}
+.fa-book .fa-book-ico{width:18px;height:18px;border-radius:3px;display:block;flex-shrink:0}
+
+/* Desktop: real nav handles these CTAs, so hide the floating stack. */
+@media (min-width:1024px){
+  .floating-actions{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .floating-actions{transition:opacity .2s ease}
+  .fa-top{transition:opacity .2s ease}
+}
 
 /* ──────────────────────────────────────────────────────────────
    TABLET+ (≥ 768px)
@@ -1735,13 +2078,19 @@ section{padding:72px 24px 64px;position:relative}
   .port-main{border-radius:260px 260px 52px 52px}
   .port-sticker{width:108px;height:108px;top:-16px;right:-24px}
 
-  /* Trust strip tablet */
-  .trust-strip{padding:22px 48px}
+  /* Trust strip tablet — drop the marquee, restore the grid. */
+  .trust-strip{padding:22px 48px;overflow:visible}
   .trust-strip-inner{
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
     column-gap:32px;row-gap:18px;
+    align-items:center;
+    overflow:visible;
+    -webkit-mask-image:none;mask-image:none;
   }
-  .ts-booksy{grid-column:1 / -1;width:fit-content;justify-self:center}
+  .ts-track,.ts-group{display:contents;animation:none;width:auto;gap:0;padding:0}
+  .ts-group--dup{display:none}
+  .ts-booksy{grid-column:1 / -1;width:fit-content;justify-self:center;margin-top:4px}
 
   /* SERVICES — two-column group layout */
   #services{padding:128px 48px 120px}
@@ -1907,6 +2256,8 @@ section{padding:72px 24px 64px;position:relative}
   @media (min-width:1200px){
     .nav-links{gap:34px}
   }
+  /* Desktop nav: reveal the inline Call/Book row (hidden on mobile in favor
+     of the floating-actions stack) and hide the hamburger. */
   .nav-actions{
     grid-column:3;
     display:inline-flex;align-items:center;gap:8px;
@@ -1917,21 +2268,15 @@ section{padding:72px 24px 64px;position:relative}
     font-family:'Barlow Condensed',sans-serif;font-weight:600;
     font-size:11px;letter-spacing:.22em;text-transform:uppercase;
     text-decoration:none;border:1.5px solid rgba(0,0,0,.18);
-    border-radius:100px;                 /* pill */
+    border-radius:100px;
     transition:border-color .2s,background .2s,color .2s,transform .2s
   }
   .nav-call svg{width:15px;height:15px}
   .nav-call:hover{border-color:var(--black);background:rgba(0,0,0,.04);transform:translateY(-1px)}
   .nav-book{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:11px 22px;background:var(--black);color:var(--white);
-    font-family:'Barlow Condensed',sans-serif;font-weight:600;
-    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    text-decoration:none;border:1.5px solid var(--black);
-    border-radius:100px;                 /* pill */
-    transition:background .2s,border-color .2s,transform .2s
+    padding:11px 22px;font-size:11px;gap:10px;
+    box-shadow:none;
   }
-  .nav-book:hover{background:var(--gd);border-color:var(--gd);transform:translateY(-1px)}
   .nav-book .arr{font-size:15px}
   .nmb{display:none}
 
