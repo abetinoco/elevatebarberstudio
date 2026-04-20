@@ -34,7 +34,7 @@ export default function About() {
             <div className="w-16 h-0.5 bg-gold-400 mb-6" />
 
             <p className="text-gray-400 leading-relaxed mb-6">
-              Elevate Barber Studio was built on a simple belief: everyone deserves to look and
+              Barber Elevate Studio was built on a simple belief: everyone deserves to look and
               feel their best. From the moment you walk in, you'll notice the difference — a
               welcoming atmosphere, skilled barbers who listen, and a commitment to craft that
               shows in every detail.

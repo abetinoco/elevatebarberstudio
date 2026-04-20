@@ -51,7 +51,7 @@ export default function Gallery() {
             rel="noopener noreferrer"
             className="text-gold-400 hover:underline"
           >
-            @elevatebarber
+            @barber_elevate_studio
           </a>{' '}
           for daily inspiration.
         </p>

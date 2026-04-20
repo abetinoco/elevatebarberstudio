@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-dark-600 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-          <p>© {year} Elevate Barber Studio. All rights reserved.</p>
+          <p>© {year} Barber Elevate Studio. All rights reserved.</p>
           <p>Built with ❤️ in React</p>
         </div>
       </div>

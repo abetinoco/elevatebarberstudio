@@ -1,0 +1,263 @@
+/* ══════════════════════════════════════════════════════════
+   PORTFOLIO PAGE — dedicated /portfolio route.
+   Shares color + typography tokens with home.css.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── PAGE HERO ── */
+.pf-hero{
+  background:var(--white);
+  padding:140px 24px 72px;
+  border-bottom:1px solid rgba(0,0,0,.06)
+}
+.pf-hero-inner{max-width:1040px;margin:0 auto;text-align:center}
+.pf-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;border:1px solid rgba(0,0,0,.12);
+  border-radius:999px;background:rgba(255,255,255,.6);
+  backdrop-filter:blur(4px);
+  font-family:'Barlow',sans-serif;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gd);
+  margin-bottom:26px
+}
+.pf-hero-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--black);
+  animation:pulseDot 2.2s ease-in-out infinite
+}
+.pf-hero-h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(56px, 11vw, 124px);
+  font-weight:900;line-height:.9;
+  letter-spacing:-.03em;
+  color:var(--black);
+  margin-bottom:22px
+}
+.pf-hero-h1-line{display:block}
+.pf-hero-h1 em{
+  font-style:italic;font-weight:700;color:var(--gm);
+  padding-right:.05em
+}
+.pf-hero-sub{
+  font-family:'Barlow',sans-serif;
+  font-size:clamp(15px,1.6vw,17px);
+  line-height:1.7;color:var(--gd);
+  max-width:620px;margin:0 auto 32px
+}
+.pf-hero-ctas{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center
+}
+
+/* ── GALLERY (masonry via CSS columns) ── */
+.pf-gallery{padding:72px 24px 96px}
+.pf-gallery-inner{
+  max-width:1320px;margin:0 auto;
+  column-count:1;column-gap:14px
+}
+.pf-gitem{
+  display:block;width:100%;
+  margin:0 0 14px;padding:0;
+  background:var(--off);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:22px;overflow:hidden;
+  cursor:zoom-in;position:relative;
+  break-inside:avoid;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .3s ease;
+  -webkit-tap-highlight-color:transparent
+}
+.pf-gitem img{
+  display:block;width:100%;height:auto;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+  filter:saturate(.96)
+}
+.pf-gitem:hover{
+  transform:translateY(-2px);
+  border-color:rgba(0,0,0,.2);
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.35)
+}
+.pf-gitem:hover img{transform:scale(1.035);filter:saturate(1.05)}
+.pf-gitem-num{
+  position:absolute;top:12px;left:14px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.18em;
+  color:#fff;mix-blend-mode:difference;
+  opacity:.75
+}
+.pf-gitem-zoom{
+  position:absolute;bottom:12px;right:14px;
+  width:32px;height:32px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.88);
+  color:var(--black);
+  backdrop-filter:blur(6px);
+  opacity:0;transform:translateY(6px);
+  transition:opacity .25s ease, transform .25s ease
+}
+.pf-gitem:hover .pf-gitem-zoom,
+.pf-gitem:focus-visible .pf-gitem-zoom{opacity:1;transform:translateY(0)}
+.pf-gitem:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+
+/* ── CTA BAND ── */
+.pf-cta-band{
+  padding:84px 24px 96px;color:var(--white)
+}
+.pf-cta-band-inner{
+  max-width:1120px;margin:0 auto;
+  display:grid;gap:32px
+}
+.pf-cta-band-copy{max-width:600px}
+.pf-cta-band-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;background:rgba(255,255,255,.05);
+  font-family:'Barlow',sans-serif;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gl);
+  margin-bottom:22px
+}
+.pf-cta-band-eyebrow-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--gl);
+  animation:pulseDot 2.2s ease-in-out infinite
+}
+.pf-cta-band-h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(44px,8vw,84px);font-weight:900;
+  line-height:.9;letter-spacing:-.02em;color:var(--white);
+  margin-bottom:18px
+}
+.pf-cta-band-h2 span{display:block}
+.pf-cta-band-h2 em{
+  display:block;font-style:italic;font-weight:700;
+  color:var(--gl)
+}
+.pf-cta-band-sub{
+  font-family:'Barlow',sans-serif;font-size:16px;line-height:1.7;
+  color:rgba(255,255,255,.78);max-width:520px
+}
+.pf-cta-band-actions{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center
+}
+.pf-cta-band-actions .cta-primary{background:var(--white);color:var(--black);border-color:var(--white)}
+.pf-cta-band-actions .cta-primary:hover{
+  background:var(--off);border-color:var(--off);color:var(--black);
+  box-shadow:0 14px 28px -12px rgba(0,0,0,.5)
+}
+.pf-cta-band-actions .cta-primary .booksy-mark{mix-blend-mode:multiply}
+.pf-cta-band-actions .cta-call{
+  background:transparent;color:var(--white);
+  border-color:rgba(255,255,255,.24)
+}
+.pf-cta-band-actions .cta-call:hover{
+  color:var(--white);background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.42)
+}
+.pf-cta-band-actions .cta-ghost,
+.pf-cta-band-actions .pf-cta-ig{
+  color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.18)
+}
+.pf-cta-band-actions .cta-ghost:hover,
+.pf-cta-band-actions .pf-cta-ig:hover{
+  color:var(--white);border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.06)
+}
+
+/* ── LIGHTBOX ── */
+.pf-lightbox{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(10,10,9,.94);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;justify-items:center;
+  padding:72px 18px 32px;
+  animation:lbIn .25s ease
+}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.pf-lb-close{
+  position:absolute;top:18px;right:18px;z-index:2;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.08);color:var(--white);
+  border:1px solid rgba(255,255,255,.22);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease
+}
+.pf-lb-close:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);transform:rotate(90deg)}
+.pf-lb-nav{
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.06);color:var(--white);
+  border:1px solid rgba(255,255,255,.18);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  flex-shrink:0
+}
+.pf-lb-nav:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.42)}
+.pf-lb-nav--prev:hover{transform:translateX(-3px)}
+.pf-lb-nav--next:hover{transform:translateX(3px)}
+.pf-lb-stage{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  max-width:min(920px, 92vw);max-height:calc(100vh - 120px);
+  justify-self:center
+}
+.pf-lb-img{
+  display:block;
+  max-width:100%;
+  max-height:calc(100vh - 180px);
+  height:auto;width:auto;
+  border-radius:16px;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.8);
+  background:var(--black)
+}
+.pf-lb-meta{
+  display:flex;align-items:center;gap:18px;
+  color:rgba(255,255,255,.82);
+  font-family:'Barlow',sans-serif;font-size:12px;
+  letter-spacing:.16em;text-transform:uppercase
+}
+.pf-lb-counter{font-weight:600}
+.pf-lb-book{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.22);
+  color:var(--white);text-decoration:none;
+  transition:background .2s ease, border-color .2s ease
+}
+.pf-lb-book:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.45)}
+.pf-lb-book .booksy-mark{
+  height:18px;width:auto;mix-blend-mode:screen;filter:invert(1)
+}
+
+/* Media queries */
+@media (min-width: 600px){
+  .pf-gallery-inner{column-count:2;column-gap:16px}
+  .pf-gitem{margin-bottom:16px;border-radius:24px}
+}
+@media (min-width: 900px){
+  .pf-hero{padding:160px 32px 80px}
+  .pf-gallery{padding:88px 32px 112px}
+  .pf-gallery-inner{column-count:3;column-gap:18px}
+  .pf-gitem{margin-bottom:18px}
+  .pf-cta-band{padding:104px 32px 120px}
+  .pf-cta-band-inner{
+    grid-template-columns:1fr auto;
+    align-items:end;gap:64px
+  }
+  .pf-cta-band-actions{justify-content:flex-end}
+}
+@media (min-width: 1200px){
+  .pf-gallery-inner{column-count:4;column-gap:20px}
+  .pf-gitem{margin-bottom:20px}
+}
+
+/* Portfolio CTA at bottom of HomePage Signature Cuts — stack pair nicely */
+.pf-cta{
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:center
+}
+.pf-cta-alt{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:var(--white);
+  border-color:rgba(255,255,255,.3)
+}
+.pf-cta-alt:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.55);color:var(--white)}
+.pf-cta-alt .booksy-mark{mix-blend-mode:screen;filter:invert(1)}
+
+/* Active link color on portfolio page — the sliding .nav-indicator
+   in SiteNav handles the underline itself. */
+.nav-links a.is-active{color:var(--black);font-weight:600}

@@ -7,6 +7,10 @@
     scroll-behavior: smooth;
   }
 
+  #root {
+    min-height: 100%;
+  }
+
   body {
     @apply bg-dark-900 text-white font-body antialiased;
   }
