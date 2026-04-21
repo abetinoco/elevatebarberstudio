@@ -130,13 +130,13 @@ export default function HomePage() {
 <SiteNav />
 
 {/* HERO — split layout, copy left / portfolio card right */}
-<section id="hero" aria-label="Barber Elevate Studio — Premium Barber in Grayslake, Lake County IL">
+<section id="hero" aria-label="Barber Elevate Studio — Premium Barber in Hainesville, Lake County IL">
   <div className="hero-inner">
     {/* LEFT: Copy */}
     <div className="hero-left">
       <div className="hero-trust">
         <span className="trust-dot" aria-hidden="true"></span>
-        <span className="trust-text">Now booking · Grayslake, IL</span>
+        <span className="trust-text">Now booking · Hainesville, IL</span>
       </div>
       <h1 className="hero-h1">
         <span className="h1-line h1-line--1">Elevate</span>
@@ -187,7 +187,7 @@ export default function HomePage() {
         <div className="port-main port-main--photo">
           <img
             src="/portfolio/cut-04.jpg"
-            alt="Precision fade at Barber Elevate Studio — Grayslake, IL"
+            alt="Precision fade at Barber Elevate Studio — Hainesville, IL"
             className="port-main-img"
             loading="eager"
           />
@@ -202,7 +202,7 @@ export default function HomePage() {
             </defs>
             <text>
               <textPath href="#port-sticker-path" startOffset="0">
-                ELEVATE · BARBER · STUDIO · GRAYSLAKE · IL ·
+                ELEVATE · BARBER · STUDIO · HAINESVILLE · IL ·
               </textPath>
             </text>
           </svg>
@@ -215,7 +215,7 @@ export default function HomePage() {
 
         <div className="port-badge">
           <span className="port-badge-name">Barber Elevate</span>
-          <span className="port-badge-role">Barber Studio &middot; Grayslake, IL</span>
+          <span className="port-badge-role">Barber Studio &middot; Hainesville, IL</span>
         </div>
 
         <div className="port-stat">
@@ -549,7 +549,7 @@ export default function HomePage() {
       <h2 className="about-display">
         <span className="about-display-italic">meet</span> Alondra.
       </h2>
-      <div className="about-name-sub">Founder · Behind the chair since 2020</div>
+      <div className="about-name-sub">Founder · Behind the chair since 2018</div>
     </div>
 
     <div className="about-portrait-wrap reveal">
@@ -935,7 +935,7 @@ export default function HomePage() {
       <ul className="closing-trust reveal" aria-label="Studio credentials">
         <li><strong>5.0★</strong> Booksy rated</li>
         <li><strong>Tue&ndash;Sat</strong> by appointment</li>
-        <li><strong>Grayslake &middot; IL</strong></li>
+        <li><strong>Hainesville &middot; IL</strong></li>
       </ul>
     </div>
 
