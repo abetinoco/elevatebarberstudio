@@ -20,15 +20,15 @@ body:has(.elevate-home)::before{
 }
 
 /* ── NAV ──
-   Nav uses a near-solid cream so it joins seamlessly with iOS Safari's
-   status bar (tinted via <meta name="theme-color" content="#F6F4F1">).
-   A thin backdrop blur keeps the layered-glass feel without letting the
-   hero image bleed through and break the color seam. */
+   Paired with <meta name="viewport" content="viewport-fit=cover"> and
+   <meta name="theme-color">, the nav's cream background is extended up
+   into the iOS safe-area inset via padding-top:env(safe-area-inset-top).
+   That way on iPhone the status bar area sits on solid cream instead of
+   whatever page content has scrolled up behind it. */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(246,244,241,0.96);
-  backdrop-filter:saturate(140%) blur(14px);
-  -webkit-backdrop-filter:saturate(140%) blur(14px);
+  padding-top:env(safe-area-inset-top, 0px);
+  background:#F6F4F1;
   border-bottom:1px solid rgba(0,0,0,0.05);
   animation:fadeDown 0.7s ease both
 }
@@ -201,7 +201,10 @@ body:has(.elevate-home){
 #hero{
   position:relative;
   min-height:auto;                 /* no more forced 100svh */
-  padding:88px 20px 28px;          /* tighter on mobile so CTA lands in first viewport */
+  /* Top padding accounts for nav height + iOS safe-area inset (notch /
+     Dynamic Island) so hero content doesn't slide under the extended nav
+     on iPhone. Resolves to plain 88px on non-iOS viewports. */
+  padding:calc(88px + env(safe-area-inset-top, 0px)) 20px 28px;
   background:var(--cream);
   color:var(--ink);
   overflow:hidden;
