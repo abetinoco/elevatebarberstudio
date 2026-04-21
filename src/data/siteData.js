@@ -5,8 +5,8 @@ export const BOOKSY_BOOK_URL = 'https://alondra01barber.booksy.com'
 export const BOOKSY_REVIEWS_URL = 'https://booksy.com/en-us/820594_alondra-barber-barberelevatestudio_barber-shop_18685_grayslake?do=invite&_branch_match_id=1574780647201977727&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDwixTAqKDEksMUqyrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUAs4Pr8zwAAAA%3D#reviews-section'
 export const GOOGLE_REVIEWS_URL = 'https://share.google/OXFOZCWB3xIC7iOwg'
 
-export const BUSINESS_PHONE_DISPLAY = '(773) 663-2161'
-export const BUSINESS_PHONE_TEL = '+17736632161'
+export const BUSINESS_PHONE_DISPLAY = '(224) 540-6180'
+export const BUSINESS_PHONE_TEL = '+12245406180'
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/barber_elevate_studio'
 export const INSTAGRAM_HANDLE = '@barber_elevate_studio'
