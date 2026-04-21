@@ -19,11 +19,16 @@ body:has(.elevate-home)::before{
   opacity:0.028;pointer-events:none;z-index:1000
 }
 
-/* ── NAV ── */
+/* ── NAV ──
+   Nav uses a near-solid cream so it joins seamlessly with iOS Safari's
+   status bar (tinted via <meta name="theme-color" content="#F6F4F1">).
+   A thin backdrop blur keeps the layered-glass feel without letting the
+   hero image bleed through and break the color seam. */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(246,244,241,0.72);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:rgba(246,244,241,0.96);
+  backdrop-filter:saturate(140%) blur(14px);
+  -webkit-backdrop-filter:saturate(140%) blur(14px);
   border-bottom:1px solid rgba(0,0,0,0.05);
   animation:fadeDown 0.7s ease both
 }
