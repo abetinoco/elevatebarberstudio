@@ -277,14 +277,19 @@ body:has(.elevate-home){
 }
 
 /* Mobile-only: collapse the three-word headline to a single line so it
-   doesn't tower over the viewport. Tablet+ keeps the stacked display. */
+   doesn't tower over the viewport. Tablet+ keeps the stacked display.
+   Tighten the hero-inner gap and pull the headline closer to its
+   neighbors with negative margins so the trust pill → headline → quote
+   reads as a compact unit instead of three airy blocks. */
 @media (max-width: 767px){
+  .hero-inner{gap:10px}
   .hero-h1{
     flex-direction:row;
     flex-wrap:nowrap;
     align-items:baseline;
     column-gap:.18em;
     white-space:nowrap;
+    margin:-10px 0 -6px;
   }
   .h1-line--1,
   .h1-line--3{font-size:clamp(34px,9.4vw,46px)}
