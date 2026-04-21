@@ -9,8 +9,25 @@
   --gd:#3D3C3A;
   --black:#131311;
 }
-html{scroll-behavior:smooth}
-body:has(.elevate-home){background:var(--white);color:var(--black);font-family:'Barlow',sans-serif;overflow-x:hidden}
+html{scroll-behavior:smooth;background:#F6F4F1}
+body:has(.elevate-home){background:#F6F4F1;color:var(--black);font-family:'Barlow',sans-serif;overflow-x:hidden}
+
+/* ── iOS STATUS-BAR PAINT ──
+   A dedicated fixed bar sitting ABOVE everything (higher than the nav,
+   the grain overlay, and any scrolling content) that fills only the
+   top safe-area inset with solid cream. This guarantees the iPhone
+   notch / Dynamic Island region is always a solid #F6F4F1 surface no
+   matter what page content has scrolled under it or how iOS Safari
+   paints the area. Height collapses to 0 on devices with no inset. */
+html::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;
+  height:env(safe-area-inset-top, 0px);
+  background:#F6F4F1;
+  z-index:1100;
+  pointer-events:none;
+}
 
 /* ── GRAIN ── */
 body:has(.elevate-home)::before{
@@ -20,11 +37,9 @@ body:has(.elevate-home)::before{
 }
 
 /* ── NAV ──
-   Paired with <meta name="viewport" content="viewport-fit=cover"> and
-   <meta name="theme-color">, the nav's cream background is extended up
-   into the iOS safe-area inset via padding-top:env(safe-area-inset-top).
-   That way on iPhone the status bar area sits on solid cream instead of
-   whatever page content has scrolled up behind it. */
+   Sits directly under the html::before status-bar paint. Background is
+   a solid #F6F4F1 so the transition from the safe-area paint to the
+   nav content is seamless. */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   padding-top:env(safe-area-inset-top, 0px);
