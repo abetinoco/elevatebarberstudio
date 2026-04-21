@@ -884,23 +884,6 @@ export default function HomePage() {
         <span className="closing-hl-line closing-hl-line--italic">Is Waiting.</span>
       </h2>
 
-      {/* Compact brand chip — renders inline under the headline on mobile only. */}
-      <div className="closing-card-wrap closing-card-wrap--inline reveal" aria-hidden="true">
-        <div className="closing-card">
-          <div className="closing-card-inner">
-            <div className="closing-card-mark">
-              <img src="/logo-elevate.png" alt="Barber Elevate Studio" className="closing-card-logo" />
-            </div>
-            <div className="closing-card-rule"></div>
-            <div className="closing-card-stat">
-              <span className="closing-card-stat-num">5.0</span>
-              <span className="closing-card-stat-star">★</span>
-            </div>
-            <div className="closing-card-label">Rated on Booksy</div>
-          </div>
-        </div>
-      </div>
-
       <p className="closing-sub reveal">
         Skip the walk-in lottery. Reserve your spot on Booksy — Lake County&rsquo;s premium barber studio is a quick drive, and every cut is by appointment only.
       </p>

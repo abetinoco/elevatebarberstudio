@@ -965,38 +965,18 @@ section{padding:52px 20px 56px;position:relative}
   letter-spacing:.22em
 }
 
-/* right: brand card (cream, soft-arch — matches hero portfolio vocabulary) */
+/* Right-column brand card (cream, soft-arch — matches hero portfolio
+   vocabulary) renders on tablet / desktop only. On mobile we drop the
+   brand chip entirely because the arch silhouette reads awkward at small
+   sizes; the "Last Stop → Your Chair Is Waiting → CTAs" flow stands on
+   its own, and the logo is already anchored by the nav + footer. */
 .closing-card-wrap{
   position:relative;
   display:flex;justify-content:center;
   padding:20px 0
 }
-
-/* ── Mobile: swap in the compact inline chip, hide the big side card ──
-   The inline variant sits right under the "Your Chair Is Waiting" headline
-   as a small brand punctuation, then the subtext/CTAs resume below it. */
-.closing-card-wrap--inline{display:none}
 @media (max-width:767px){
   .closing-card-wrap--aside{display:none}
-  .closing-card-wrap--inline{
-    display:flex;justify-content:center;
-    padding:4px 0 22px;margin-top:-4px
-  }
-  .closing-card-wrap--inline .closing-card{
-    max-width:200px;
-    aspect-ratio:5 / 4;
-    border-radius:110px 110px 22px 22px;
-    box-shadow:0 14px 32px -18px rgba(0,0,0,0.45)
-  }
-  /* Mobile chip is logo-only: strip rule / stat / label / meta so the
-     wordmark can sit at the true optical center of the arch shape. */
-  .closing-card-wrap--inline .closing-card-rule,
-  .closing-card-wrap--inline .closing-card-stat,
-  .closing-card-wrap--inline .closing-card-label,
-  .closing-card-wrap--inline .closing-card-meta{display:none}
-  .closing-card-wrap--inline .closing-card-inner{padding:18px;gap:0}
-  .closing-card-wrap--inline .closing-card-mark{margin:0}
-  .closing-card-wrap--inline .closing-card-logo{height:54px;width:auto}
 }
 .closing-card{
   position:relative;
