@@ -9,8 +9,14 @@
   --gd:#3D3C3A;
   --black:#131311;
 }
-html{scroll-behavior:smooth;background:#F6F4F1}
-body:has(.elevate-home){background:#F6F4F1;color:var(--black);font-family:'Barlow',sans-serif;overflow-x:hidden}
+/* Body background MUST stay var(--white) — the wave SVG dividers have a
+   transparent upper half that shows the body color through, and the
+   .pattern-bg-light sections use var(--white). Changing this to any other
+   cream creates a visible solid strip above every wave divider. The iOS
+   notch is handled separately by html::before below, so we do NOT need
+   html/body to carry the nav's #F6F4F1 cream. */
+html{scroll-behavior:smooth;background:var(--white)}
+body:has(.elevate-home){background:var(--white);color:var(--black);font-family:'Barlow',sans-serif;overflow-x:hidden}
 
 /* ── iOS STATUS-BAR PAINT ──
    A dedicated fixed bar sitting ABOVE everything (higher than the nav,
