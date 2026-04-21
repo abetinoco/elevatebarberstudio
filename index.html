@@ -18,6 +18,12 @@
     />
   </head>
   <body>
+    <!-- iOS status-bar paint. A real DOM node (not a pseudo-element) painted
+         over the top safe-area inset so the iPhone notch / Dynamic Island /
+         status-bar region is always solid #F6F4F1 cream, regardless of what
+         content is scrolled underneath. Uses max z-index and inline styles
+         so it survives CSS bundling, cache, and React mount timing. -->
+    <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#F6F4F1;z-index:2147483647;pointer-events:none;"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
