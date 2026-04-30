@@ -154,9 +154,9 @@ export default function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               className="ft-credit-link"
-              title="Halo — web design and digital studio"
+              title="Halo Web Agency — web design and digital studio"
             >
-              Halo
+              Halo Web Agency
             </a>
           </p>
         </div>
