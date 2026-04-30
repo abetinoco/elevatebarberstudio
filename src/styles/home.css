@@ -768,6 +768,21 @@ section{padding:52px 20px 56px;position:relative}
 
 .about-inner{position:relative}
 
+.about-members{
+  display:flex;flex-direction:column;
+  gap:clamp(44px,8vw,80px)
+}
+
+/* Each barber block reuses the same headline / portrait / story rhythm */
+.about-member{
+  position:relative;
+  margin:0;padding:0
+}
+
+/* Slight alternation so back-to-back portraits don't feel identical */
+.about-member:nth-child(even) .about-portrait{transform:rotate(1.25deg)}
+.about-member:nth-child(even) .about-portrait::before{transform:translateX(-50%) rotate(3deg)}
+
 .about-label{
   display:inline-flex;align-items:center;gap:10px;
   font-family:'Barlow Condensed',sans-serif;
@@ -2143,39 +2158,40 @@ section{padding:52px 20px 56px;position:relative}
   .svc-cta-wrap .btn-wht{min-width:320px}
 
   /* ABOUT — editorial two-column layout */
+  /* ABOUT — each .about-member is its own 12-col editorial grid */
   #about{padding:64px 48px;max-width:1280px;margin:0 auto}
-  #about .about-inner{
+  #about .about-inner{display:block}
+  #about .about-members{gap:clamp(56px,7vw,96px)}
+  #about .about-member{
     display:grid;
     grid-template-columns:repeat(12,1fr);
     column-gap:32px;row-gap:20px;
     align-items:start
   }
-  #about .about-label{grid-column:1 / 13;margin-bottom:12px}
-  #about .about-name-block{grid-column:1 / 9;margin-bottom:8px}
-  #about .about-display{font-size:clamp(80px,8.5vw,128px);line-height:.92}
-  #about .about-name-sub{margin-top:10px}
-  /* Portrait spans the name + story rows and aligns to their shared
-     vertical center so it reads next to the "meet ALONDRA." headline
-     instead of drifting down beside the body copy. */
-  #about .about-portrait-wrap{
+  #about .about-label{margin-bottom:12px}
+  #about .about-member .about-name-block{grid-column:1 / 9;margin-bottom:8px}
+  #about .about-member .about-display{font-size:clamp(80px,8.5vw,128px);line-height:.92}
+  #about .about-member .about-name-sub{margin-top:10px}
+  #about .about-member .about-portrait-wrap{
     grid-column:9 / 13;grid-row:2 / span 2;
     margin:0;padding-left:32px;
     justify-content:flex-end;
     align-self:center
   }
-  #about .about-portrait{
+  #about .about-member .about-portrait{
     width:100%;max-width:260px;height:300px;
     border-radius:130px;transform:rotate(-2deg)
   }
-  #about .about-portrait::before{width:84px;height:20px;top:-8px}
-  #about .about-story{
+  #about .about-member:nth-child(even) .about-portrait{transform:rotate(2deg)}
+  #about .about-member .about-portrait::before{width:84px;height:20px;top:-8px}
+  #about .about-member .about-story{
     grid-column:1 / 9;grid-row:3;
     padding-right:32px;margin:0;max-width:none
   }
-  #about .about-story p{font-size:16px;line-height:1.55;margin-bottom:14px}
-  #about .about-drop{font-size:58px;margin-top:4px}
-  #about .about-signoff{margin-top:24px;padding-top:16px}
-  #about .about-sign-name{font-size:30px}
+  #about .about-member .about-story p{font-size:16px;line-height:1.55;margin-bottom:14px}
+  #about .about-member .about-drop{font-size:58px;margin-top:4px}
+  #about .about-member .about-signoff{margin-top:24px;padding-top:16px}
+  #about .about-member .about-sign-name{font-size:30px}
 
   /* CLOSING CTA (tablet) */
   #closing{padding:120px 48px 128px}

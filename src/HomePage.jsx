@@ -22,6 +22,7 @@ import {
   HOURS,
 } from './data/siteData'
 import { SIGNATURE_CUTS } from './data/portfolio'
+import { TEAM_LABEL, TEAM_MEMBERS } from './data/team'
 
 const PROCESS_STEPS = [
   { n: '01', t: 'Book',    icon: 'calendar', d: 'Pick your service on Booksy. Under 60 seconds — you\u2019ll see the exact barber, time, and price.' },
@@ -540,37 +541,52 @@ export default function HomePage() {
   </svg>
 </div>
 
-{/* ABOUT */}
+{/* ABOUT — data-driven roster (see src/data/team.js) */}
 <section id="about" className="pattern-bg-light">
   <div className="about-inner">
-    <span className="about-label reveal">The Artist</span>
+    <span className="about-label reveal">{TEAM_LABEL}</span>
 
-    <div className="about-name-block reveal">
-      <h2 className="about-display">
-        <span className="about-display-italic">meet</span> Alondra.
-      </h2>
-      <div className="about-name-sub">Founder · Behind the chair since 2018</div>
-    </div>
+    <div className="about-members">
+      {TEAM_MEMBERS.map((m) => (
+        <article key={m.id} className="about-member reveal" aria-labelledby={`about-name-${m.id}`}>
+          <div className="about-name-block">
+            <h2 className="about-display" id={`about-name-${m.id}`}>
+              <span className="about-display-italic">{m.headlineItalic}</span>{' '}
+              {m.headlineName}
+            </h2>
+            <div className="about-name-sub">{m.roleLine}</div>
+          </div>
 
-    <div className="about-portrait-wrap reveal">
-      <div className="about-portrait">
-        <img src="/about-alondra.png" alt="Alondra — Founder of Barber Elevate Studio" />
-      </div>
-    </div>
+          <div className="about-portrait-wrap">
+            <div className="about-portrait">
+              <img
+                src={m.imageSrc}
+                alt={m.imageAlt}
+                style={m.portraitObjectPosition ? { objectPosition: m.portraitObjectPosition } : undefined}
+              />
+            </div>
+          </div>
 
-    <div className="about-story reveal">
-      <p>
-        <span className="about-drop">A</span>
-        londra learned early that the best haircuts aren&apos;t about technique alone — they&apos;re about paying attention. Who&apos;s sitting in the chair. What kind of day they&apos;ve had. What version of themselves they want to walk out as.
-      </p>
-      <p>
-        That&apos;s the standard she built Barber Elevate on. Precision fades and clean lines, sure — but also a real conversation, a chair that feels welcoming, and work that gets done with care. It&apos;s why clients don&apos;t just come back. They bring people with them.
-      </p>
-
-      <div className="about-signoff">
-        <span className="about-sign-name">Alondra</span>
-        <span className="about-sign-role">Founder · Barber Elevate Studio</span>
-      </div>
+          <div className="about-story">
+            {m.paragraphs.map((text, pi) => (
+              <p key={`${m.id}-p-${pi}`}>
+                {pi === m.dropCapSentenceIndex && m.dropCapLetter ? (
+                  <>
+                    <span className="about-drop">{m.dropCapLetter}</span>
+                    {text}
+                  </>
+                ) : (
+                  text
+                )}
+              </p>
+            ))}
+            <div className="about-signoff">
+              <span className="about-sign-name">{m.signName}</span>
+              <span className="about-sign-role">{m.signRole}</span>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
