@@ -10,6 +10,7 @@ import {
   FACEBOOK_HANDLE,
   MAPS_DIRECTIONS_URL,
   HOURS,
+  HALO_SITE_URL,
 } from '../data/siteData'
 
 function useHomeHref() {
@@ -130,15 +131,34 @@ export default function SiteFooter() {
 
       <div className="ft-bottom">
         <div className="ft-bottom-inner">
-          <p className="ft-copy">© 2026 Barber Elevate Studio. All rights reserved.</p>
-          <nav className="ft-nav" aria-label="Footer">
-            <a href={href('services')}>Services</a>
-            <Link to="/portfolio">Work</Link>
-            <a href={href('about')}>About</a>
-            <a href={href('reviews')}>Reviews</a>
-            <a href={href('faq')}>FAQ</a>
-            <a href={href('location')}>Visit</a>
-          </nav>
+          <div className="ft-bottom-primary">
+            <p className="ft-copy">© 2026 Barber Elevate Studio. All rights reserved.</p>
+            <nav className="ft-nav" aria-label="Footer">
+              <a href={href('services')}>Services</a>
+              <Link to="/portfolio">Work</Link>
+              <a href={href('about')}>About</a>
+              <a href={href('reviews')}>Reviews</a>
+              <a href={href('faq')}>FAQ</a>
+              <a href={href('location')}>Visit</a>
+            </nav>
+          </div>
+          <p className="ft-credit">
+            Made with{' '}
+            <span className="ft-credit-heart" aria-hidden="true">
+              ♥
+            </span>
+            <span className="ft-sr-only"> love </span>
+            by{' '}
+            <a
+              href={HALO_SITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ft-credit-link"
+              title="Halo — web design and digital studio"
+            >
+              Halo
+            </a>
+          </p>
         </div>
       </div>
     </footer>
