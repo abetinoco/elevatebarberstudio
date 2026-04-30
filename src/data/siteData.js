@@ -15,7 +15,7 @@ export const FACEBOOK_HANDLE = 'Barber Elevate Studio'
 
 /** Halo — crawlable footer attribution (real <a href> for search engines).
  *  Update to your canonical marketing domain if this ever changes. */
-export const HALO_SITE_URL = 'https://haloweb.ca'
+export const HALO_SITE_URL = 'https://haloit.tech'
 
 export const STUDIO_ADDRESS = '72 E Belvidere Rd, Hainesville, IL 60030'
 /* maps.google.com embed tends to load more reliably than www for iframes */
